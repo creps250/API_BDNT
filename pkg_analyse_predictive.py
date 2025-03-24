@@ -178,8 +178,7 @@ def prepare_data_for_prediction(data: Donneur_Data):
         'Situation Matrimoniale (SM)', 'Profession_Commune',
         'Arrondissement de résidence', 'Quartier de Résidence',
         'Religion', 'A-t-il (elle) déjà donné le sang',
-        'Taux d’hémoglobine',
-        'ÉLIGIBILITÉ AU DON.', 'Age'
+        'Taux d’hémoglobine', 'Age'
     ]
     
     df = df[colonnes_a_conserver]
