@@ -1,12 +1,19 @@
 
+import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
+from scipy import stats
+from plotly.subplots import make_subplots
 from sqlalchemy import desc
 import joblib
+
 import pickle
 from typing import Optional, List, Dict, Any, Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import uvicorn
+from dash import Dash, html, dcc, callback, Input, Output, State
 import requests
 import threading
 from sklearn.impute import SimpleImputer
@@ -19,7 +26,7 @@ app_fastapi = FastAPI(title="API de Prédiction de l'éligibilité au don de san
 
 @app_fastapi.get("/")
 def great():
-    return {"message":" henc"}
+    return {"message":" Bienvenue sur l'API pour la prédiction du statut d'elegibilité au don de sang"}
 class Donneur_Data(BaseModel):
     
     Genre: str = Field(
@@ -134,7 +141,7 @@ class PredictionModel(BaseModel):
 async def load_model():
     global model
     try:
-        model = joblib.load('model_random')
+        model = joblib.load('model_random.pkl')
         print("Modèle chargé avec succès")
     except Exception as e:
         print(f"Erreur lors du chargement du modèle: {e}")
@@ -161,7 +168,7 @@ def prepare_data_for_prediction(data: Donneur_Data):
         "Situation_Matrimoniale": "Situation Matrimoniale (SM)",
         "Religion": "Religion",
         "A_deja_donne": "A-t-il (elle) déjà donné le sang",
-        "profession": "Profession",
+        "profession": "Profession_Commune",
         "Taille": "Taille",
         "Poids": "Poids",
         "Quartier_residence": "Quartier de Résidence",
@@ -173,6 +180,16 @@ def prepare_data_for_prediction(data: Donneur_Data):
 
     # Code pour renommer les colonnes du DataFrame
     df = df.rename(columns=mapping)
+    
+    colonnes_a_conserver = [ 'Niveau d\'etude', 'Genre', 'Taille', 'Poids',
+        'Situation Matrimoniale (SM)', 'Profession_Commune',
+        'Arrondissement de résidence', 'Quartier de Résidence',
+        'Religion', 'A-t-il (elle) déjà donné le sang',
+        'Taux d’hémoglobine',
+        'ÉLIGIBILITÉ AU DON.', 'Age'
+    ]
+    
+    df = df[colonnes_a_conserver]
     
     # Ici, vous pourriez ajouter des étapes de prétraitement supplémentaires
     # comme la normalisation ou l'encodage des variables catégorielles
@@ -187,8 +204,10 @@ async def predict(data: Donneur_Data):
         # Préparation des données
         df = prepare_data_for_prediction(data)
         
+        seuil_optimal = 0.65
+        
         # Prédiction
-        prediction = model.predict(df)
+        prediction = (modele.predict_proba(X_test)[::,1]>seuil_optimal).astype(int)
         
         # Calcul de la probabilité si disponible
         probability = None
@@ -224,6 +243,5 @@ async def predict(data: Donneur_Data):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la prédiction: {str(e)}")
-
 
 
