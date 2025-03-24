@@ -199,7 +199,7 @@ async def predict(data: Donneur_Data):
         seuil_optimal = 0.65
         
         # Prédiction
-        prediction = (modele.predict_proba(X_test)[::,1]>seuil_optimal).astype(int)
+        prediction = (model.predict_proba(X_test)[::,1]>seuil_optimal).astype(int)
         
         # Calcul de la probabilité si disponible
         probability = None
