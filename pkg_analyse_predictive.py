@@ -1,10 +1,4 @@
-
-import plotly.express as px
-import plotly.graph_objects as go
 import pandas as pd
-import numpy as np
-from scipy import stats
-from plotly.subplots import make_subplots
 from sqlalchemy import desc
 import joblib
 
@@ -13,7 +7,6 @@ from typing import Optional, List, Dict, Any, Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import uvicorn
-from dash import Dash, html, dcc, callback, Input, Output, State
 import requests
 import threading
 from sklearn.impute import SimpleImputer
