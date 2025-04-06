@@ -1,0 +1,21 @@
+2025-04-05 05:58:02,666 - INFO - Modèle chargé avec succès depuis model_eligibilite.pkl
+2025-04-05 05:59:17,650 - INFO - Arrêt de l'API - Libération des ressources
+2025-04-06 16:54:57,317 - INFO - === Démarrage du moniteur d'API ===
+2025-04-06 16:54:57,318 - INFO - Chemin de l'API: C:\Users\Ultra Tech\Desktop\LOGICIEL\api\blood_eligibility_api.py
+2025-04-06 16:54:57,318 - INFO - Port: 10000
+2025-04-06 16:54:57,318 - INFO - Intervalle de vérification: 60 secondes
+2025-04-06 16:54:59,354 - INFO - Démarrage de l'API avec la commande: C:\Users\Ultra Tech\anaconda3\python.exe -m uvicorn blood_eligibility_api:app_fastapi --host 0.0.0.0 --port 10000 --log-level info
+2025-04-06 16:54:59,367 - INFO - PID 16144 enregistré dans C:\Users\Ultra Tech\Desktop\LOGICIEL\api\api_pid.txt
+2025-04-06 16:54:59,371 - INFO - Attente du démarrage de l'API...
+2025-04-06 16:55:24,836 - INFO - Arrêt du moniteur, nettoyage des ressources...
+2025-04-06 16:55:24,837 - INFO - Signal terminate envoyé au processus API (PID: 16144)
+2025-04-06 16:55:56,681 - INFO - Modèle chargé avec succès depuis model_eligibilite.pkl
+2025-04-06 16:58:09,693 - INFO - DataFrame préparé avec succès: (1, 38)
+2025-04-06 16:58:09,693 - INFO - Données préparées, lancement de la prédiction multiclasse...
+2025-04-06 16:58:09,738 - INFO - Classe prédite: Eligible avec probabilité 0.9700
+2025-04-06 16:58:09,741 - INFO - Prédiction réussie: Eligible (Probabilité: 0.97)
+2025-04-06 16:59:04,857 - INFO - DataFrame préparé avec succès: (1, 38)
+2025-04-06 16:59:04,857 - INFO - Données préparées, lancement de la prédiction multiclasse...
+2025-04-06 16:59:04,893 - INFO - Classe prédite: Temporairement Non-eligible avec probabilité 0.7600
+2025-04-06 16:59:04,893 - INFO - Prédiction réussie: Temporairement Non-eligible (Probabilité: 0.76)
+2025-04-06 16:59:41,488 - INFO - Arrêt de l'API - Libération des ressources
